@@ -42,7 +42,7 @@ export default function FriendsScreen() {
                             <Text style={friendStyles.name}>{name}</Text>
 
                             <View style={friendStyles.rowSpacer}></View>
-                            
+
                             {
                                 (isOnline && <Text style={[friendStyles.status, friendStyles.statusOnline]}>Online</Text>)
                                 || <Text style={[friendStyles.status, friendStyles.statusOffline]}>Offline</Text>

@@ -5,14 +5,17 @@ import {Helmet} from "react-native-helmet-async";
 
 export function MapView() {
     const insertScript = `
-            <script>
-            console.log('Works');
-            var map = new maplibregl.Map({
-                container: 'map', // container ID
-                style: 'https://demotiles.maplibre.org/style.json', // style URL
-                center: [-74.0060, 40.7128], // starting position [lng, lat] (New York City)
-                zoom: 9, // starting zoom
-            });
+            <script type="module">
+                import("https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js").then(
+                    () => {
+                        var map = new maplibregl.Map({
+                            container: 'map', // container ID
+                            style: 'https://demotiles.maplibre.org/style.json', // style URL
+                            center: [-74.0060, 40.7128], // starting position [lng, lat] (New York City)
+                            zoom: 9, // starting zoom
+                        });
+                    }
+                );
             </script>`;
     const elRef = useRef<HTMLDivElement>();
     useLayoutEffect(() => { // same as useEffect
@@ -31,8 +34,7 @@ export function MapView() {
     }, []);
     return (
         <View style={styles.map} ref={elRef}>
-            <div id="map" style={styles.map}></div>
-            <script src="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js"></script>
+            <View id="map" style={styles.map}></View>
             <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css"/>
         </View>
     );
