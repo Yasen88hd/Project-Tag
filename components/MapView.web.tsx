@@ -1,5 +1,5 @@
 import {StyleSheet, TouchableOpacity, useColorScheme, View} from 'react-native';
-import React, {useEffect, useLayoutEffect, useRef} from "react";
+import React, {RefObject, useEffect, useLayoutEffect, useRef} from "react";
 import {container} from "ansi-fragments";
 import {Helmet} from "react-native-helmet-async";
 
@@ -17,32 +17,32 @@ export function MapView() {
                     }
                 );
             </script>`;
-    const elRef = useRef<HTMLDivElement>();
-    useLayoutEffect(() => { // same as useEffect
-        const range = document.createRange();
-        range.selectNode(elRef.current);
-        const documentFragment = range.createContextualFragment(insertScript);
+    const elRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        if (elRef.current != null) {
+            const range = document.createRange();
+            range.selectNode(elRef.current);
+            const documentFragment = range.createContextualFragment(insertScript);
 
-        // Inject the markup, triggering a re-run!
-        // elRef.current.innerHTML = '';
-        elRef.current.append(documentFragment);
-
-        // const script = document.createElement("script");
-        // const scriptText = document.createTextNode("console.log(maplibregl);");
-        // script.appendChild(scriptText);
-        // elRef.current.append(script);
+            // Inject the markup, triggering a re-run!
+            // elRef.current.innerHTML = '';
+            elRef.current.append(documentFragment);
+        }
     }, []);
     return (
-        <View style={styles.map} ref={elRef}>
-            <View id="map" style={styles.map}></View>
+        <div style={styles.container} ref={elRef}>
+            <div id="map" style={styles.map}></div>
             <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css"/>
-        </View>
+        </div>
     );
 }
 
 const styles = StyleSheet.create({
-    map: {
-        flex: 1,
+    container: {
         alignSelf: 'stretch',
+        height: '100%',
+    },
+    map: {
+        height: '100%',
     },
 });
