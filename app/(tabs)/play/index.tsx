@@ -21,11 +21,11 @@ export default function HomeScreen() {
   const navigation = useRouter();
 
   const handleCreateGame = () => {
-    navigation.navigate('/(tabs)/CreateGameScreen'); // Navigates to 'CreateGame'
+    navigation.navigate('/(tabs)/play/CreateGameScreen'); // Navigates to 'CreateGame'
   };
 
   const handleJoinGame = () => {
-    navigation.navigate('/(tabs)/JoinGameScreen'); // Navigates to 'JoinGame'
+    navigation.navigate('/(tabs)/play/JoinGameScreen'); // Navigates to 'JoinGame'
   };
 
   return (
