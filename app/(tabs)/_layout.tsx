@@ -17,6 +17,10 @@ export default function TabLayout() {
         headerShown: false,
       }}>
         <Tabs.Screen
+            name='index'
+            options={{href: null}}
+        />
+        <Tabs.Screen
             name="friends"
             options={{
                 title: 'Friends',
@@ -26,7 +30,7 @@ export default function TabLayout() {
             }}
         />
         <Tabs.Screen
-            name="index"
+            name="play"
             options={{
                 title: 'Play',
                 tabBarIcon: ({ color, focused }) => (
