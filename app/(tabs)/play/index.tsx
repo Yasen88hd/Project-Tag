@@ -31,21 +31,22 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.backgroundContainer}>
-        {/* <ImageBackground
-          source={require('..\..\assets\images\gameHomePageBackground.webp')}
+        { 
+        <ImageBackground
+          source={require('../../../assets/images/proba.png')}
           style={{
             width: screenWidth,
             height: screenHeight,
             flex: 1,
           }}
           resizeMode="cover"
-        /> */}
+        /> }
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.buttonCreate} onPress={handleCreateGame}>
           <Text style={styles.buttonText}>Create Game</Text>
         </TouchableOpacity>
-
+        
         <TouchableOpacity style={styles.buttonJoin} onPress={handleJoinGame}>
           <Text style={styles.buttonText}>Join Game</Text>
         </TouchableOpacity>
@@ -71,17 +72,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonCreate: {
-    marginTop: 250,
+    marginTop: 80,
     height: 100,
     width: 250,
     transform: 'rotateZ(-25deg)',
-    borderRadius: 20,
+    borderRadius: 10,
     borderRightWidth: 1,
     borderLeftWidth: 1,
     borderBottomWidth: 14,
-    borderColor: '#024e51',
+    borderColor: '#2859de',
     elevation: 30,
-    backgroundColor: '#1E90FF', // Added background color for visibility
+    backgroundColor: '#1E90FF',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -92,8 +93,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#20c967',
     transform: 'rotateZ(25deg)',
     borderRadius: 10,
-    borderColor: '#b1b5b5',
-    borderWidth: 5,
+    borderRightWidth: 1,
+    borderLeftWidth: 1,
+    borderBottomWidth: 14,
+    borderColor: '#18994e',
+    elevation: 30,
     justifyContent: 'center',
     alignItems: 'center',
   },
