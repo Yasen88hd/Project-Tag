@@ -18,7 +18,7 @@ export default function FriendsScreen() {
         <View style={pageStyles.container}>
             <View>
                 <View style={pageStyles.header}>
-                    <Link href={'/(tabs)/friends/addFriend'}>
+                    <Link href={'/friends/addFriend'}>
                         <TouchableOpacity style={pageStyles.control}>
                             <FontAwesome6 name="add" size={24} style={pageStyles.controlItem} />
                             <Text style={pageStyles.controlItem}>Add friend</Text>

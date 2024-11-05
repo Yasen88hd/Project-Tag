@@ -27,7 +27,7 @@ export default function JoinGameScreen() {
       <View style={styles.backgroundContainer}>
         { 
         <ImageBackground
-          source={require('../../../assets/images/forest2.png')}
+          source={require('../../../../assets/images/forest2.png')}
           style={{
             width: screenWidth,
             height: screenHeight,

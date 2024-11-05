@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
+import {useRouter} from "expo-router";
 
 // Type for form data
 interface FormData {
@@ -16,7 +17,8 @@ interface FormData {
 }
 
 // Main LoginScreen Component
-const LoginScreen: React.FC = () => {
+export default function LoginScreen() {
+  const router = useRouter();
   const [isSignUp, setIsSignUp] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
     email: '',
@@ -45,12 +47,14 @@ const LoginScreen: React.FC = () => {
 
   // Handle form submission
   const handleSubmit = () => {
-    if (validateForm()) {
-      const action = isSignUp ? 'Sign Up' : 'Sign In';
-      Alert.alert(`${action} Successful`, `Welcome, ${formData.email}!`);
-      // Reset form after submission
-      setFormData({ email: '', password: '', confirmPassword: '' });
-    }
+    router.replace('/(main)/');
+
+    // if (validateForm()) {
+    //   const action = isSignUp ? 'Sign Up' : 'Sign In';
+    //   Alert.alert(`${action} Successful`, `Welcome, ${formData.email}!`);
+    //   // Reset form after submission
+    //   setFormData({ email: '', password: '', confirmPassword: '' });
+    // }
   };
 
   return (
@@ -100,8 +104,6 @@ const LoginScreen: React.FC = () => {
     </View>
   );
 };
-
-export default LoginScreen;
 
 // Styles for the component
 const styles = StyleSheet.create({

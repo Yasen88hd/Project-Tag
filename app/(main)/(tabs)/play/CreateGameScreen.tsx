@@ -30,7 +30,7 @@ export default function CreateGameScreen() {
       <View style={styles.backgroundContainer}>
         { 
         <ImageBackground
-          source={require('../../../assets/images/forest3.png')}
+          source={require('../../../../assets/images/forest3.png')}
           style={{
             width: screenWidth,
             height: screenHeight,

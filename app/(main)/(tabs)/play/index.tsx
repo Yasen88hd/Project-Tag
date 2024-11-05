@@ -21,11 +21,11 @@ export default function HomeScreen() {
   const navigation = useRouter();
 
   const handleCreateGame = () => {
-    navigation.navigate('/(tabs)/play/CreateGameScreen');
+    navigation.navigate('/play/CreateGameScreen');
   };
 
   const handleJoinGame = () => {
-    navigation.navigate('/(tabs)/play/JoinGameScreen');
+    navigation.navigate('/play/JoinGameScreen');
   };
 
   return (
@@ -33,7 +33,7 @@ export default function HomeScreen() {
       <View style={styles.backgroundContainer}>
         { 
         <ImageBackground
-          source={require('../../../assets/images/proba.png')}
+          source={require('../../../../assets/images/proba.png')}
           style={{
             width: screenWidth,
             height: screenHeight,
