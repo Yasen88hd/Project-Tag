@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ImageBackground, StyleSheet, View, Text, Dimensions, ScaledSize, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';  // Navigation hook for React Native
+import { useNavigation } from '@react-navigation/native'; 
 import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
@@ -21,11 +21,11 @@ export default function HomeScreen() {
   const navigation = useRouter();
 
   const handleCreateGame = () => {
-    navigation.navigate('/(tabs)/play/CreateGameScreen'); // Navigates to 'CreateGame'
+    navigation.navigate('/(tabs)/play/CreateGameScreen');
   };
 
   const handleJoinGame = () => {
-    navigation.navigate('/(tabs)/play/JoinGameScreen'); // Navigates to 'JoinGame'
+    navigation.navigate('/(tabs)/play/JoinGameScreen');
   };
 
   return (
