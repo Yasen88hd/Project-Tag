@@ -8,10 +8,11 @@ import {
   Alert,
 } from 'react-native';
 import {useRouter} from "expo-router";
+import jsSHA from "jssha";
 
 // Type for form data
 interface FormData {
-  email: string;
+  username: string;
   password: string;
   confirmPassword?: string;
 }
@@ -21,7 +22,7 @@ export default function LoginScreen() {
   const router = useRouter();
   const [isSignUp, setIsSignUp] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
-    email: '',
+    username: '',
     password: '',
     confirmPassword: '',
   });
@@ -33,8 +34,8 @@ export default function LoginScreen() {
 
   // Basic form validation
   const validateForm = () => {
-    const { email, password, confirmPassword } = formData;
-    if (!email || !password) {
+    const { username, password, confirmPassword } = formData;
+    if (!username || !password) {
       Alert.alert('Error', 'Please fill in all required fields.');
       return false;
     }
@@ -46,15 +47,31 @@ export default function LoginScreen() {
   };
 
   // Handle form submission
-  const handleSubmit = () => {
-    router.replace('/(main)/');
+  const handleSubmit = async () => {
 
-    // if (validateForm()) {
-    //   const action = isSignUp ? 'Sign Up' : 'Sign In';
-    //   Alert.alert(`${action} Successful`, `Welcome, ${formData.email}!`);
-    //   // Reset form after submission
-    //   setFormData({ email: '', password: '', confirmPassword: '' });
-    // }
+    var data = new FormData();
+    data.append('username', formData.username);
+
+    const hash = new jsSHA("SHA-384", "TEXT");
+    hash.update(formData.password);
+    var hashedPass = hash.getHash('HEX');
+    data.append('password', hashedPass);
+
+    if (validateForm()) {
+      var resp = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        body: data,
+      });
+
+      // Reset form after submission
+      setFormData({ username: '', password: '', confirmPassword: '' });
+
+      if (resp.ok) {
+        const action = isSignUp ? 'Sign Up' : 'Sign In';
+        Alert.alert(`${action} Successful`, `Welcome, ${formData.username}!`);
+        router.replace('/(main)/');
+      }
+    }
   };
 
   return (
@@ -63,10 +80,9 @@ export default function LoginScreen() {
       
       <TextInput
         style={styles.input}
-        placeholder="Email"
-        keyboardType="email-address"
-        value={formData.email}
-        onChangeText={(text) => handleInputChange('email', text)}
+        placeholder="Username"
+        value={formData.username}
+        onChangeText={(text) => handleInputChange('username', text)}
       />
       
       <TextInput
