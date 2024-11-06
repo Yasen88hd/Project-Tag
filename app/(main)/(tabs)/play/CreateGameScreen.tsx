@@ -3,14 +3,14 @@ import { View, Text, StyleSheet, TextInput, FlatList, ImageBackground, ScaledSiz
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign, FontAwesome6 } from "@expo/vector-icons";
 import { Picker } from '@react-native-picker/picker';
-import { StyleSource } from '@maplibre/maplibre-react-native';
+import { BackgroundLayer, StyleSource } from '@maplibre/maplibre-react-native';
 
 export default function CreateGameScreen() {
   const navigation = useNavigation();
   const [screenWidth, setScreenWidth] = useState(Dimensions.get('window').width);
   const [screenHeight, setScreenHeight] = useState(Dimensions.get('window').height);
   const [selectedOption, setSelectedOption] = useState('random');
-  const [minutes, setMinutes] = useState('');
+  const [minutes, setMinutes] = useState('1');
   const [seconds, setSeconds] = useState('');
 
   useEffect(() => {
@@ -46,12 +46,13 @@ export default function CreateGameScreen() {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.playersContainer}>
+      <View style={styles.threeContainer}>
+        <View style={styles.playersContainer}>
         <View style={styles.header}>
           <Text style={styles.headerText}>Players</Text>
         </View>
         <FlatList
-          style={styles.container}
+          style={styles.namesContainer}
           data={[
            {name:'Oliver'},
            {name:'Jack'},
@@ -66,9 +67,9 @@ export default function CreateGameScreen() {
           )}
           >
           </FlatList>
-      </View>
+        </View>
       
-      <View style={styles.settingsContainer}>
+        <View style={styles.settingsContainer}>
         <View style={styles.header}>
           <Text style={styles.headerText}>Settings</Text>
         </View>
@@ -109,17 +110,19 @@ export default function CreateGameScreen() {
 
         </View>
 
-      </View>
+        </View>
 
-      <View style={styles.joinCodeContainer}>
+        <View style={styles.joinCodeContainer}>
         <Text style={styles.textBox}>Code: {"\n"}DKASMD</Text>
+        </View>
       </View>
 
-      <View style={styles.startButtonContainer}>
+        <View style={styles.startButtonContainer}>
         <TouchableOpacity style={styles.startButton} onPress={() => navigation.goBack()}>
           <Text style={styles.buttonText}>Start Game</Text>
         </TouchableOpacity>
-      </View>
+        </View>
+      
     </View>
   );
 }
@@ -127,6 +130,7 @@ export default function CreateGameScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
   },
   backgroundContainer: {
     position: 'absolute',
@@ -135,17 +139,23 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
   },
+  threeContainer: {
+    position: 'relative',
+    top: 0,
+    marginTop: 150,
+    height: '50%',
+    width: '84%',
+    //backgroundColor: '#999999',
+  },
   playersContainer: {
-    //marginTop: 120,
-    marginTop: '30%',
-    //marginLeft: 30,
-    marginLeft: '8%',
+    position: 'absolute',
+    left: 0,
     backgroundColor: '#999999',
-    //height: 300,
-    height: '37%',
-    //width: 150,
-    width: '40%',
-    borderWidth: 1.5,
+    height: '75%',
+    width: '47%',
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: '#fff',
   },
   row: {
     marginLeft: '5%',
@@ -169,24 +179,26 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
   },
+  namesContainer: {
+    flex: 1,
+    marginTop: '10%',
+  },
   settingsContainer: {
-    //marginTop: -295,
-    marginTop: '-75%',
-    //marginLeft: 220,
-    marginLeft: '55%',
+    position: 'absolute',
+    right: 0,
     backgroundColor: '#999999',
-    //height: 450,
-    height: '55%',
-    //width: 140,
-    width: '35.5%',
-    borderWidth: 1.5,
+    height: '100%',
+    width: '45%',
+    borderWidth: 2,
+    borderColor: '#fff',
+    borderRadius: 10,
   },
   mainSettingsPart: {
     flex: 1,
     alignItems: 'center',
   },
   contentText: {
-    marginTop: '15%',
+    marginTop: 20,
     marginBottom: '10%',
     fontSize: 17,
   },
@@ -213,32 +225,31 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },  
   joinCodeContainer: {
-    //marginTop: -100,
-    marginTop: '-20%',
-    //marginLeft: 30,
-    marginLeft: '8%',
-    backgroundColor: '#fff',
-    //height: 70,
-    height: '8.5%',
-    //width: 150,
-    width: '40%',
+    position: 'absolute',
+    bottom: 0,
+    marginBottom: 20,
+    height: '14%',
+    width: '47%',
   },
   textBox: {
     height: '100%',
     width: '100%',
     borderWidth: 1.5,
     borderColor: "#000",
+    backgroundColor: '#fff',
+    borderRadius: 10,
     textAlign: "center",
     fontSize: 17,
   },
   startButtonContainer: {
-    //marginLeft: 97.5,
-    marginLeft: '25%',
-    //marginTop: 100,
-    marginTop: '24%',
+    //position: 'absolute',
+    marginTop: 100,
+    //bottom: 0,
+    //marginBottom: '5%',
     height: '8.5%',
     width: '50%',
     justifyContent: 'center',
+    
   },
   startButton: {
     flex: 1,
@@ -259,6 +270,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   backButtonContainer: {
+    position: 'absolute',
     top: 15,
     left: 15,
   },
