@@ -26,13 +26,15 @@ export default function addFriendScreen() {
         </TouchableOpacity>
       </View>
 
-      <TextInput
-        style={styles.textBox}
-        value={text}
-        onChangeText={onChangeText}
-        placeholder={"Enter username"}
-      />
-      <TouchableOpacity style={styles.button}>Add friend</TouchableOpacity>
+      <View style={styles.mainContainer}>
+        <TextInput
+          style={styles.textBox}
+          value={text}
+          onChangeText={onChangeText}
+          placeholder={"Enter username"}
+        />
+        <TouchableOpacity style={styles.button}>Add friend</TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -49,6 +51,7 @@ const styles = StyleSheet.create({
     left: 15,
   },
   backButton: {},
+  mainContainer: {},
   buttonContainer: {
     position: "absolute",
     bottom: 50,
