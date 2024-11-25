@@ -1,46 +1,72 @@
-import {Button, Pressable, ScrollView, StyleSheet, TextInput, TouchableOpacity, View} from "react-native";
+import {
+  Button,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
-import {gray} from "colorette";
+import { gray } from "colorette";
+import { router } from "expo-router";
+import { AntDesign } from "@expo/vector-icons";
 
 export default function addFriendScreen() {
-    const [text, onChangeText] = React.useState('');
-    return (
-        <View style={styles.container}>
-            <TextInput
-                style={styles.textBox}
-                value={text}
-                onChangeText={onChangeText}
-                placeholder={"Enter username"}
-            />
-            <TouchableOpacity
-                style={styles.button}
-            >
-                Add friend
-            </TouchableOpacity>
-        </View>
-    );
+  const [text, onChangeText] = React.useState("");
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.backButtonContainer}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.back()}
+        >
+          <AntDesign name="leftcircleo" size={24} color="black" />
+        </TouchableOpacity>
+      </View>
+
+      <TextInput
+        style={styles.textBox}
+        value={text}
+        onChangeText={onChangeText}
+        placeholder={"Enter username"}
+      />
+      <TouchableOpacity style={styles.button}>Add friend</TouchableOpacity>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        margin: 12,
-    },
-    textBox: {
-        padding: 12,
-        borderWidth: 1,
-        borderColor: "#999",
-        textAlign: "center",
-    },
-    button: {
-        marginTop: 20,
-        textAlign: "center",
-        backgroundColor: "#0cf",
-        padding: 12,
-        color: "#fff",
-        borderRadius: 4,
-    },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  backButtonContainer: {
+    position: "absolute",
+    top: 15,
+    left: 15,
+  },
+  backButton: {},
+  buttonContainer: {
+    position: "absolute",
+    bottom: 50,
+    right: 30,
+    alignItems: "center",
+  },
+  textBox: {
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "#999",
+    textAlign: "center",
+  },
+  button: {
+    marginTop: 20,
+    textAlign: "center",
+    backgroundColor: "#0cf",
+    padding: 12,
+    color: "#fff",
+    borderRadius: 4,
+  },
 });
