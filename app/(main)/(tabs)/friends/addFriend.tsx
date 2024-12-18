@@ -20,9 +20,9 @@ export default function addFriendScreen() {
       <View style={styles.backButtonContainer}>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() => router.back()}
+          onPress={() => router.push("/(main)/friends/")}
         >
-          <AntDesign name="leftcircleo" size={24} color="black" />
+          <AntDesign name="leftcircleo" size={24} color="black"/>
         </TouchableOpacity>
       </View>
 

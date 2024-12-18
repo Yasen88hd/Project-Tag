@@ -2,6 +2,7 @@ import {Href, router} from "expo-router";
 import {StyleSheet, Switch, Text, TouchableOpacity, View} from "react-native";
 import {Feather} from "@expo/vector-icons";
 import React, {ReactNode, useState} from "react";
+import {AntDesign} from "@expo/vector-icons";
 
 export abstract class SettingsOption {
     name: string;
@@ -95,31 +96,51 @@ export  class RedirectOption extends SettingsOption {
     }
 }
 
+export  class BackButton extends SettingsOption {
+    public Render(): React.ReactNode {
+        return (
+            <View style={styles.backButtonContainer}>
+                <TouchableOpacity
+                    style={styles.backButton}
+                    onPress={() => router.push("/settings/")}
+                >
+                    <AntDesign name="leftcircleo" size={24} color="black"/>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+}
+
 export const settingsOptions : SettingsOption[] = [
     new MenuOption('Account details',
         [
+            new BackButton(""),
             new SwitchOption('Change username'),
             new SwitchOption('Change password'),
             new SwitchOption('Change profile picture'),
             new RedirectOption('Sign out', '/'),
         ]),
-    new MenuOption('Notifications', []),
-    new MenuOption('Appearance', []),
+    new MenuOption('Notifications', [
+        new BackButton(""),
+    ]),
+    new MenuOption('Appearance', [
+        new BackButton(""),
+    ]),
     new RedirectOption('About', '/'),
 ];
 
 const styles = StyleSheet.create({
     title: {
         fontSize: 24,
-        // color: '#fff',
-        marginBottom: 16
+        marginBottom: 16,
     },
     row: {
+        position: "relative",
+        top: 48,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
         height: 50,
-        // backgroundColor: '#f2f2f2',
         backgroundColor: '#fff',
         borderRadius: 8,
         marginBottom: 12,
@@ -128,5 +149,13 @@ const styles = StyleSheet.create({
     rowSpacer: {
         flexGrow: 1,
         flexBasis: 0,
+    },
+    backButtonContainer: {
+        position: "absolute",
+        top: 15,
+        left: 15,
+        zIndex: 1,
+    },
+    backButton: {
     },
 });
